@@ -448,7 +448,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         child: Text(
                           currentCountryCode,
-                          style: textTheme.displaySmall!.copyWith(
+                          style: textTheme.bodyLarge!.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                         ),

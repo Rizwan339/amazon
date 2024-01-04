@@ -115,7 +115,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     alignment: Alignment.center,
                     child: Icon(
                       Icons.circle,
-                      size: height * 0.015,
+                      size: height * 0.02,
                       color: newUser ? transparent : secondaryColor,
                     ),
                   ),
@@ -165,7 +165,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         alignment: Alignment.center,
                         child: Icon(
                           Icons.circle,
-                          size: height * 0.015,
+                          size: height * 0.02,
                           color: newUser ? secondaryColor : transparent,
                         ),
                       ),
@@ -271,18 +271,15 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 CommonFunctions.blankSpace(height * 0.02, 0),
                 ElevatedButton(
-                    onPressed: () {},
-                    child: Container(
-                        width: double.infinity,
-                        height: height * 0.07,
-                        child: Text(
-                          'Continue',
-                          style: textTheme.bodyMedium,
-                        ),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: grey),
-                            color: secondaryColor,
-                            borderRadius: BorderRadius.circular(6)))),
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(width * 0.88, height * 0.07),
+                      backgroundColor: amber),
+                  child: Text(
+                    'Continue',
+                    style: textTheme.bodyLarge,
+                  ),
+                ),
                 CommonFunctions.blankSpace(
                   height * 0.02,
                   0,
@@ -354,7 +351,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         alignment: Alignment.center,
                         child: Icon(
                           Icons.circle,
-                          size: height * 0.015,
+                          size: height * 0.02,
                           color: newUser ? transparent : secondaryColor,
                         ),
                       ),
@@ -434,8 +431,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             });
                       },
                       child: Container(
-                        height: height * 0.06,
-                        width: width * 0.2,
+                        height: height * 0.07,
+                        width: width * 0.17,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -455,12 +452,13 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: height * 0.06,
-                      width: width * 0.64,
+                      height: height * 0.07,
+                      width: width * 0.68,
                       child: TextFormField(
+                        cursorHeight: 20,
                         controller: mobileController,
                         cursorColor: black,
-                        style: textTheme.displaySmall,
+                        style: textTheme.bodyLarge,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: 'Mobile number',
@@ -493,6 +491,17 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     )
                   ],
+                ),
+                CommonFunctions.blankSpace(height * 0.02, 0),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(width * 0.88, height * 0.07),
+                      backgroundColor: amber),
+                  child: Text(
+                    'Continue',
+                    style: textTheme.bodyLarge,
+                  ),
                 ),
                 CommonFunctions.blankSpace(height * 0.02, 0),
                 Text(

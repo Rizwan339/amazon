@@ -271,48 +271,14 @@ class _AuthScreenState extends State<AuthScreen> {
                         cursorColor: black,
                         style: textTheme.bodyLarge,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'Mobile number',
-                          hintStyle: textTheme.bodySmall,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: grey,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: const BorderSide(
-                              color: secondaryColor,
-                            ),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: grey,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: grey,
-                            ),
-                          ),
-                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 CommonFunctions.blankSpace(height * 0.02, 0),
-                ElevatedButton(
+                CommonAuthButton(
+                  title: 'Continue',
                   onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(width * 0.88, height * 0.07),
-                      backgroundColor: amber),
-                  child: Text(
-                    'Continue',
-                    style: textTheme.bodyLarge,
-                  ),
                 ),
                 CommonFunctions.blankSpace(
                   height * 0.02,
@@ -420,30 +386,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     decoration: InputDecoration(
                       hintText: 'First and Last Name',
                       hintStyle: textTheme.bodySmall,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: grey,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: const BorderSide(
-                          color: secondaryColor,
-                        ),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: grey,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: grey,
-                        ),
-                      ),
                     ),
                   ),
                 ),
@@ -497,30 +439,6 @@ class _AuthScreenState extends State<AuthScreen> {
                         decoration: InputDecoration(
                           hintText: 'Mobile number',
                           hintStyle: textTheme.bodySmall,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: grey,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: const BorderSide(
-                              color: secondaryColor,
-                            ),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: grey,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: grey,
-                            ),
-                          ),
                         ),
                       ),
                     )
@@ -535,23 +453,27 @@ class _AuthScreenState extends State<AuthScreen> {
                   height * 0.02,
                   0,
                 ),
-                ElevatedButton(
+                CommonAuthButton(
+                  title: 'Continue',
                   onPressed: () {},
-                  style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          const EdgeInsets.only(
-                              top: 8, bottom: 8, left: 100, right: 100)),
-                      backgroundColor: MaterialStateProperty.all<Color>(amber),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(color: grey)))),
-                  child: Text(
-                    'Continue',
-                    style: textTheme.bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w600),
-                  ),
                 ),
+                // ElevatedButton(
+                //   onPressed: () {},
+                //   style: ButtonStyle(
+                //       padding: MaterialStateProperty.all<EdgeInsets>(
+                //           const EdgeInsets.only(
+                //               top: 8, bottom: 8, left: 100, right: 100)),
+                //       backgroundColor: MaterialStateProperty.all<Color>(amber),
+                //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                //           RoundedRectangleBorder(
+                //               borderRadius: BorderRadius.circular(10),
+                //               side: BorderSide(color: grey)))),
+                //   child: Text(
+                //     'Continue',
+                //     style: textTheme.bodyLarge!
+                //         .copyWith(fontWeight: FontWeight.w600),
+                //   ),
+                // ),
                 CommonFunctions.blankSpace(height * 0.02, 0),
                 RichText(
                   text: TextSpan(
@@ -632,6 +554,30 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CommonAuthButton extends StatelessWidget {
+  CommonAuthButton({super.key, required this.title, required this.onPressed});
+  String title;
+  VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final textTheme = Theme.of(context).textTheme;
+
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+          minimumSize: Size(width * 0.88, height * 0.07),
+          backgroundColor: amber),
+      child: Text(
+        'Continue',
+        style: textTheme.bodyLarge,
       ),
     );
   }

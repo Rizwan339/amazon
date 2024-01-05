@@ -68,6 +68,40 @@ class _AuthScreenState extends State<AuthScreen> {
                   height * 0.05,
                   0,
                 ),
+                Container(
+                  height: 1.5,
+                  width: width,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [white, grey, white])),
+                ),
+                CommonFunctions.blankSpace(
+                  height * 0.03,
+                  0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Condition of Use',
+                        style: textTheme.bodyMedium!.copyWith(color: blue)),
+                    CommonFunctions.blankSpace(
+                      1,
+                      width * 0.05,
+                    ),
+                    Text('Privacy Policy',
+                        style: textTheme.bodyMedium!.copyWith(color: blue)),
+                    CommonFunctions.blankSpace(
+                      1,
+                      width * 0.05,
+                    ),
+                    Text('Help',
+                        style: textTheme.bodyMedium!.copyWith(color: blue)),
+                  ],
+                ),
+                CommonFunctions.blankSpace(height * 0.01, 1),
+                Text(
+                  '   @ 1990-2024, Amazon.com, Inc. or its affiliaties',
+                  style: textTheme.bodySmall!.copyWith(color: grey),
+                )
               ],
             ),
           ),
@@ -493,17 +527,6 @@ class _AuthScreenState extends State<AuthScreen> {
                   ],
                 ),
                 CommonFunctions.blankSpace(height * 0.02, 0),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(width * 0.88, height * 0.07),
-                      backgroundColor: amber),
-                  child: Text(
-                    'Continue',
-                    style: textTheme.bodyLarge,
-                  ),
-                ),
-                CommonFunctions.blankSpace(height * 0.02, 0),
                 Text(
                   'By enrolling your mobile phone number, you concent to receive automated security notifications via text message from Amazon.\nMessage and data rates may apply.',
                   style: textTheme.bodyMedium,
@@ -512,6 +535,24 @@ class _AuthScreenState extends State<AuthScreen> {
                   height * 0.02,
                   0,
                 ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                      padding: MaterialStateProperty.all<EdgeInsets>(
+                          const EdgeInsets.only(
+                              top: 8, bottom: 8, left: 100, right: 100)),
+                      backgroundColor: MaterialStateProperty.all<Color>(amber),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(color: grey)))),
+                  child: Text(
+                    'Continue',
+                    style: textTheme.bodyLarge!
+                        .copyWith(fontWeight: FontWeight.w600),
+                  ),
+                ),
+                CommonFunctions.blankSpace(height * 0.02, 0),
                 RichText(
                   text: TextSpan(
                     children: [

@@ -65,7 +65,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   return createAccount(width, height, textTheme, context);
                 }),
                 CommonFunctions.blankSpace(
-                  height * 0.05,
+                  height * 0.06,
                   0,
                 ),
                 Container(
@@ -79,28 +79,28 @@ class _AuthScreenState extends State<AuthScreen> {
                   0,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text('Condition of Use',
-                        style: textTheme.bodyMedium!.copyWith(color: blue)),
+                        style: textTheme.labelLarge!.copyWith(color: blue)),
                     CommonFunctions.blankSpace(
                       1,
                       width * 0.05,
                     ),
                     Text('Privacy Policy',
-                        style: textTheme.bodyMedium!.copyWith(color: blue)),
+                        style: textTheme.labelLarge!.copyWith(color: blue)),
                     CommonFunctions.blankSpace(
                       1,
                       width * 0.05,
                     ),
                     Text('Help',
-                        style: textTheme.bodyMedium!.copyWith(color: blue)),
+                        style: textTheme.labelLarge!.copyWith(color: blue)),
                   ],
                 ),
                 CommonFunctions.blankSpace(height * 0.01, 1),
                 Text(
                   '   @ 1990-2024, Amazon.com, Inc. or its affiliaties',
-                  style: textTheme.bodySmall!.copyWith(color: grey),
+                  style: textTheme.labelSmall!.copyWith(color: grey),
                 )
               ],
             ),
@@ -140,16 +140,16 @@ class _AuthScreenState extends State<AuthScreen> {
                     });
                   },
                   child: Container(
-                    height: height * 0.03,
-                    width: height * 0.03,
+                    height: height * 0.04,
+                    width: width * 0.04,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: grey),
                         color: white),
-                    alignment: Alignment.center,
+                    // alignment: Alignment.center,
                     child: Icon(
                       Icons.circle,
-                      size: height * 0.02,
+                      size: height * 0.015,
                       color: newUser ? transparent : secondaryColor,
                     ),
                   ),
@@ -163,10 +163,10 @@ class _AuthScreenState extends State<AuthScreen> {
                     children: [
                       TextSpan(
                           text: 'Create Account. ',
-                          style: textTheme.bodyMedium!
+                          style: textTheme.bodySmall!
                               .copyWith(fontWeight: FontWeight.bold)),
                       TextSpan(
-                          text: 'New to Amazon? ', style: textTheme.bodyMedium)
+                          text: 'New to Amazon? ', style: textTheme.bodySmall)
                     ],
                   ),
                 ),
@@ -190,8 +190,8 @@ class _AuthScreenState extends State<AuthScreen> {
                         });
                       },
                       child: Container(
-                        height: height * 0.03,
-                        width: height * 0.03,
+                        height: height * 0.04,
+                        width: width * 0.04,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: grey),
@@ -199,7 +199,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         alignment: Alignment.center,
                         child: Icon(
                           Icons.circle,
-                          size: height * 0.02,
+                          size: height * 0.015,
                           color: newUser ? secondaryColor : transparent,
                         ),
                       ),
@@ -213,11 +213,11 @@ class _AuthScreenState extends State<AuthScreen> {
                         children: [
                           TextSpan(
                               text: 'Sign in. ',
-                              style: textTheme.bodyMedium!
+                              style: textTheme.bodySmall!
                                   .copyWith(fontWeight: FontWeight.bold)),
                           TextSpan(
                               text: 'Already a Customer',
-                              style: textTheme.bodyMedium)
+                              style: textTheme.bodySmall)
                         ],
                       ),
                     ),
@@ -256,7 +256,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         child: Text(
                           currentCountryCode,
                           //  style: TextStyle(fontSize: 18),
-                          style: textTheme.bodyLarge!.copyWith(
+                          style: textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -271,6 +271,9 @@ class _AuthScreenState extends State<AuthScreen> {
                         cursorColor: black,
                         style: textTheme.bodyLarge,
                         keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            hintText: 'Mobile Number',
+                            hintStyle: textTheme.labelLarge),
                       ),
                     ),
                   ],
@@ -342,16 +345,16 @@ class _AuthScreenState extends State<AuthScreen> {
                         });
                       },
                       child: Container(
-                        height: height * 0.03,
-                        width: height * 0.03,
+                        height: height * 0.04,
+                        width: width * 0.04,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: grey),
                             color: white),
-                        alignment: Alignment.center,
+                        // alignment: Alignment.center,
                         child: Icon(
                           Icons.circle,
-                          size: height * 0.02,
+                          size: height * 0.015,
                           color: newUser ? transparent : secondaryColor,
                         ),
                       ),
@@ -365,11 +368,11 @@ class _AuthScreenState extends State<AuthScreen> {
                         children: [
                           TextSpan(
                               text: 'Create Account. ',
-                              style: textTheme.bodyMedium!
+                              style: textTheme.bodySmall!
                                   .copyWith(fontWeight: FontWeight.bold)),
                           TextSpan(
                               text: 'New to Amazon?',
-                              style: textTheme.bodyMedium)
+                              style: textTheme.bodySmall)
                         ],
                       ),
                     ),
@@ -421,7 +424,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         child: Text(
                           currentCountryCode,
-                          style: textTheme.bodyLarge!.copyWith(
+                          style: textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -447,7 +450,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 CommonFunctions.blankSpace(height * 0.02, 0),
                 Text(
                   'By enrolling your mobile phone number, you concent to receive automated security notifications via text message from Amazon.\nMessage and data rates may apply.',
-                  style: textTheme.bodyMedium,
+                  style: textTheme.bodySmall,
                 ),
                 CommonFunctions.blankSpace(
                   height * 0.02,
@@ -519,8 +522,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     });
                   },
                   child: Container(
-                    height: height * 0.03,
-                    width: height * 0.03,
+                    height: height * 0.04,
+                    width: width * 0.04,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: grey),
@@ -542,11 +545,11 @@ class _AuthScreenState extends State<AuthScreen> {
                     children: [
                       TextSpan(
                           text: 'Sign In ',
-                          style: textTheme.bodyMedium!
+                          style: textTheme.bodySmall!
                               .copyWith(fontWeight: FontWeight.bold)),
                       TextSpan(
                           text: 'Already a Customer? ',
-                          style: textTheme.bodyMedium)
+                          style: textTheme.bodySmall)
                     ],
                   ),
                 ),
@@ -574,10 +577,12 @@ class CommonAuthButton extends StatelessWidget {
       onPressed: () {},
       style: ElevatedButton.styleFrom(
           minimumSize: Size(width * 0.88, height * 0.07),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           backgroundColor: amber),
       child: Text(
         'Continue',
-        style: textTheme.bodyLarge,
+        style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
       ),
     );
   }

@@ -52,7 +52,7 @@ final themeData = ThemeData(
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.red),
+      borderSide: const BorderSide(color: Colors.red),
     ),
   ),
   //  elevatedButtonTheme: ElevatedButtonThemeData(
@@ -67,7 +67,7 @@ final themeData = ThemeData(
 
 final darkTheme = ThemeData(
   brightness: Brightness.dark,
-  scaffoldBackgroundColor: Color.fromARGB(255, 5, 70, 102),
+  scaffoldBackgroundColor: const Color.fromARGB(255, 5, 70, 102),
   //  appBarTheme: AppBarTheme(
   //   backgroundColor: Colors.lightBlue
   //  ),
@@ -108,15 +108,15 @@ final darkTheme = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.yellow),
+      borderSide: const BorderSide(color: Colors.yellow),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.green),
+      borderSide: const BorderSide(color: Colors.green),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.red),
+      borderSide: const BorderSide(color: Colors.red),
     ),
   ),
   //  elevatedButtonTheme: ElevatedButtonThemeData(

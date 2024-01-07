@@ -68,40 +68,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   height * 0.06,
                   0,
                 ),
-                Container(
-                  height: 1.5,
-                  width: width,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [white, grey, white])),
-                ),
-                CommonFunctions.blankSpace(
-                  height * 0.03,
-                  0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text('Condition of Use',
-                        style: textTheme.labelLarge!.copyWith(color: blue)),
-                    CommonFunctions.blankSpace(
-                      1,
-                      width * 0.05,
-                    ),
-                    Text('Privacy Policy',
-                        style: textTheme.labelLarge!.copyWith(color: blue)),
-                    CommonFunctions.blankSpace(
-                      1,
-                      width * 0.05,
-                    ),
-                    Text('Help',
-                        style: textTheme.labelLarge!.copyWith(color: blue)),
-                  ],
-                ),
-                CommonFunctions.blankSpace(height * 0.01, 1),
-                Text(
-                  '   @ 1990-2024, Amazon.com, Inc. or its affiliaties',
-                  style: textTheme.labelSmall!.copyWith(color: grey),
-                )
+                const BottomAuthWidget(),
               ],
             ),
           ),
@@ -280,6 +247,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 CommonFunctions.blankSpace(height * 0.02, 0),
                 CommonAuthButton(
+                  buttonwidth: 0.85,
                   title: 'Continue',
                   onPressed: () {},
                 ),
@@ -388,7 +356,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     controller: nameController,
                     decoration: InputDecoration(
                       hintText: 'First and Last Name',
-                      hintStyle: textTheme.bodySmall,
+                      hintStyle: textTheme.labelLarge,
                     ),
                   ),
                 ),
@@ -441,7 +409,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: 'Mobile number',
-                          hintStyle: textTheme.bodySmall,
+                          hintStyle: textTheme.labelLarge,
                         ),
                       ),
                     )
@@ -457,6 +425,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   0,
                 ),
                 CommonAuthButton(
+                  buttonwidth: 0.85,
                   title: 'Continue',
                   onPressed: () {},
                 ),
@@ -562,10 +531,67 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 }
 
+class BottomAuthWidget extends StatelessWidget {
+  const BottomAuthWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final textTheme = Theme.of(context).textTheme;
+    return SizedBox(
+      child: Column(
+        children: [
+          Container(
+            height: 1.5,
+            width: width,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [white, greyShade3, white])),
+          ),
+          CommonFunctions.blankSpace(
+            height * 0.03,
+            0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('Condition of Use',
+                  style: textTheme.labelLarge!.copyWith(color: blue)),
+              CommonFunctions.blankSpace(
+                1,
+                width * 0.05,
+              ),
+              Text('Privacy Policy',
+                  style: textTheme.labelLarge!.copyWith(color: blue)),
+              CommonFunctions.blankSpace(
+                1,
+                width * 0.05,
+              ),
+              Text('Help', style: textTheme.labelLarge!.copyWith(color: blue)),
+            ],
+          ),
+          CommonFunctions.blankSpace(height * 0.01, 1),
+          Text(
+            '   @ 1990-2024, Amazon.com, Inc. or its affiliaties',
+            style: textTheme.labelSmall!.copyWith(color: grey),
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class CommonAuthButton extends StatelessWidget {
-  CommonAuthButton({super.key, required this.title, required this.onPressed});
+  CommonAuthButton(
+      {super.key,
+      required this.title,
+      required this.onPressed,
+      required this.buttonwidth});
   String title;
   VoidCallback onPressed;
+  double buttonwidth;
 
   @override
   Widget build(BuildContext context) {
@@ -576,7 +602,7 @@ class CommonAuthButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-          minimumSize: Size(width * 0.88, height * 0.07),
+          minimumSize: Size(width * buttonwidth, height * 0.07),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           backgroundColor: amber),

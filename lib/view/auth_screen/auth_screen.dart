@@ -1,7 +1,12 @@
 import 'package:amazon/constants/common_functions.dart';
+import 'package:amazon/controller/services/auth_services/auth_services.dart';
 import 'package:amazon/utils/colors.dart';
+import 'package:amazon/view/auth_screen/home/home_screen.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+
+import 'otp_screen.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -233,9 +238,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       height: height * 0.07,
                       width: width * 0.68,
                       child: TextFormField(
-                        cursorHeight: 20,
                         controller: mobileController,
-                        cursorColor: black,
                         style: textTheme.bodyLarge,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -249,7 +252,14 @@ class _AuthScreenState extends State<AuthScreen> {
                 CommonAuthButton(
                   buttonwidth: 0.85,
                   title: 'Continue',
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigator.of(context).push(
+                    //     MaterialPageRoute(builder: (context) => HomeScreen()));
+                    AuthServices.receiveOTP(
+                        context: context,
+                        mobileNo:
+                            '$currentCountryCode${mobileController.text.trim()}');
+                  },
                 ),
                 CommonFunctions.blankSpace(
                   height * 0.02,
@@ -427,7 +437,12 @@ class _AuthScreenState extends State<AuthScreen> {
                 CommonAuthButton(
                   buttonwidth: 0.85,
                   title: 'Continue',
-                  onPressed: () {},
+                  onPressed: () {
+                    AuthServices.receiveOTP(
+                        context: context,
+                        mobileNo:
+                            '$currentCountryCode${mobileController.text.trim()}');
+                  },
                 ),
                 // ElevatedButton(
                 //   onPressed: () {},
@@ -600,7 +615,7 @@ class CommonAuthButton extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
           minimumSize: Size(width * buttonwidth, height * 0.07),
           shape:

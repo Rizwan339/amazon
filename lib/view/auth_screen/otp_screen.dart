@@ -1,8 +1,10 @@
 import 'package:amazon/constants/common_functions.dart';
 import 'package:amazon/utils/colors.dart';
 import 'package:amazon/utils/theme.dart';
+import 'package:amazon/view/auth_screen/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../controller/services/auth_services/auth_services.dart';
 import 'auth_screen.dart';
 
 class OTPScreen extends StatefulWidget {
@@ -78,7 +80,17 @@ class _OTPScreenState extends State<OTPScreen> {
               CommonAuthButton(
                 buttonwidth: 0.99,
                 title: 'Continue',
-                onPressed: () {},
+                onPressed: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const HomeScreen(),
+                  //     ));
+                  AuthServices.verifyOTP(
+                    context: context,
+                    otp: otpController.text.trim(),
+                  );
+                },
               ),
               CommonFunctions.blankSpace(height * 0.002, width),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [

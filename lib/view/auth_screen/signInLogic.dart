@@ -3,7 +3,7 @@ import 'package:amazon/view/auth_screen/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../home/home_screen.dart';
+import '../user/home/home_screen.dart';
 
 class SignInLogic extends StatefulWidget {
   const SignInLogic({super.key});

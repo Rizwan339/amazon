@@ -1,7 +1,7 @@
 import 'package:amazon/constants/common_functions.dart';
 import 'package:amazon/utils/colors.dart';
 import 'package:amazon/utils/theme.dart';
-import 'package:amazon/view/home/home_screen.dart';
+import 'package:amazon/view/user/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../controller/services/auth_services/auth_services.dart';

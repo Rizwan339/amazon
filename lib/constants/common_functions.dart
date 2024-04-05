@@ -1,3 +1,4 @@
+import 'package:amazon/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class CommonFunctions {
@@ -5,6 +6,14 @@ class CommonFunctions {
     return SizedBox(
       height: height ?? 0,
       width: width ?? 0,
+    );
+  }
+
+  static divider() {
+    return Divider(
+      height: 0,
+      thickness: 2,
+      color: greyShade3,
     );
   }
 }

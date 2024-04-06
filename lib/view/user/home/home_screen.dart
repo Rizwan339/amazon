@@ -14,6 +14,32 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   CarouselController todaysDealController = CarouselController();
+  gridHeadphoneDealsFunc(int index) {
+    switch (index) {
+      case 0:
+        return "Bose";
+      case 1:
+        return "boAt";
+      case 2:
+        return "Sony";
+      case 3:
+        return "OnePlus";
+    }
+  }
+
+  gridClothingDealsFunc(int index) {
+    switch (index) {
+      case 0:
+        return "Kurtas,saress&more";
+      case 1:
+        return "Tops, dresses & more";
+      case 2:
+        return "T-Shirt, Jeans & more";
+      case 3:
+        return "View all";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -24,110 +50,245 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size(width * 1, height * 0.08),
-          child: HomePageAppBar(width: width, height: height),
+          child: const HomePageAppBar(),
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              HomeScreenUserAddressBar(height: height, width: width),
+              const HomeScreenUserAddressBar(),
               CommonFunctions.divider(),
-              HomeScreenCategoriesList(height: height, width: width),
+              const HomeScreenCategoriesList(),
               CommonFunctions.blankSpace(height * 0.01, 0),
               CommonFunctions.divider(),
-              HomeScreenBanner(height: height),
-              SizedBox(
+              const HomeScreenBanner(),
+              TodaysDealsHomeScreenWidget(
+                  todaysDealController: todaysDealController),
+              CommonFunctions.divider(),
+              gridViewDealsMethod(
+                  title: 'Latest Launches in Headphones',
+                  textButtonName: 'Explore more',
+                  dealPicsNames: headphonesDeals,
+                  offerFor: 'headphones'),
+              CommonFunctions.divider(),
+              Container(
+                height: height * 0.4,
                 width: width,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.04, vertical: height * 0.01),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '50%-80% Off | Latest deals.',
-                        style: textTheme.bodySmall!
-                            .copyWith(fontWeight: FontWeight.w600),
-                      ),
-                      CarouselSlider(
-                        carouselController: todaysDealController,
-                        options: CarouselOptions(
-                            height: height * 0.28,
-                            autoPlay: true,
-                            viewportFraction: 1),
-                        items: todaysDeals.map((i) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                decoration: BoxDecoration(
-                                  color: white,
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/todays_deals/$i"),
-                                    fit: BoxFit.fitHeight,
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        }).toList(),
-                      ),
-                      CommonFunctions.blankSpace(height * 0.01, 0),
-                      Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: red),
-                            child: Text(
-                              "Upto 62% Off",
-                              style:
-                                  textTheme.bodySmall!.copyWith(color: white),
-                            ),
-                          ),
-                          CommonFunctions.blankSpace(0, width * 0.03),
-                          Text(
-                            "Deal of the Day",
-                            style: textTheme.bodySmall!.copyWith(
-                                color: red, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      CommonFunctions.blankSpace(height * 0.01, 0),
-                      GridView.builder(
-                          itemCount: 4,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
-                                  mainAxisSpacing: 10,
-                                  crossAxisSpacing: 20),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                log(index.toString());
-                                todaysDealController.animateToPage(index);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: greyShade3),
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/todays_deals/${todaysDeals[index]}"),
-                                      fit: BoxFit.contain),
-                                ),
-                              ),
-                            );
-                          }),
-                    ],
-                  ),
+                child: const Image(
+                  image: AssetImage(
+                      "assets/images/offersNsponcered/insurance.png"),
+                  fit: BoxFit.fill,
                 ),
+              ),
+              gridViewDealsMethod(
+                  title: 'Minimum 70% Off | Top Offers on Clothing',
+                  textButtonName: 'See all Deals',
+                  dealPicsNames: clothingDealsList,
+                  offerFor: 'clothing'),
+              CommonFunctions.divider(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CommonFunctions.blankSpace(height * 0.01, 0),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                    child: Text(
+                      'Watch Sixer only on MiniTV',
+                      style: textTheme.bodySmall!
+                          .copyWith(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Container(
+                    height: height * 0.45,
+                    width: width,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.03,
+                      vertical: height * 0.01,
+                    ),
+                    child: const Image(
+                      image: AssetImage(
+                          "assets/images/offersNsponcered/sixer.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ],
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Container gridViewDealsMethod({
+    required String title,
+    required String textButtonName,
+    required List<String> dealPicsNames,
+    required String offerFor,
+  }) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final textTheme = Theme.of(context).textTheme;
+    return Container(
+      padding: EdgeInsets.symmetric(
+          horizontal: width * 0.03, vertical: height * 0.01),
+      width: width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w600),
+          ),
+          CommonFunctions.blankSpace(height * 0.01, 0),
+          GridView.builder(
+              itemCount: 4,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, mainAxisSpacing: 10, crossAxisSpacing: 10),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {},
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: greyShade3),
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    "assets/images/offersNsponcered/${dealPicsNames[index]}"),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        offerFor == 'headphones'
+                            ? gridHeadphoneDealsFunc(index)
+                            : gridClothingDealsFunc(index),
+                        style: textTheme.labelMedium,
+                      )
+                    ],
+                  ),
+                );
+              }),
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              textButtonName,
+              style: textTheme.bodySmall!.copyWith(color: blue),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TodaysDealsHomeScreenWidget extends StatelessWidget {
+  const TodaysDealsHomeScreenWidget({
+    super.key,
+    required this.todaysDealController,
+  });
+
+  final CarouselController todaysDealController;
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final textTheme = Theme.of(context).textTheme;
+    return SizedBox(
+      width: width,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: width * 0.04, vertical: height * 0.01),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '50%-80% Off | Latest deals.',
+              style: textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600),
+            ),
+            CarouselSlider(
+              carouselController: todaysDealController,
+              options: CarouselOptions(
+                  height: height * 0.28, autoPlay: true, viewportFraction: 1),
+              items: todaysDeals.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      // margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(
+                        color: white,
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/todays_deals/$i"),
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
+            CommonFunctions.blankSpace(height * 0.01, 0),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5), color: red),
+                  child: Text(
+                    "Upto 62% Off",
+                    style: textTheme.bodySmall!.copyWith(color: white),
+                  ),
+                ),
+                CommonFunctions.blankSpace(0, width * 0.03),
+                Text(
+                  "Deal of the Day",
+                  style: textTheme.bodySmall!
+                      .copyWith(color: red, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            CommonFunctions.blankSpace(height * 0.01, 0),
+            GridView.builder(
+                itemCount: 4,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 20),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      log(index.toString());
+                      todaysDealController.animateToPage(index);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: greyShade3),
+                        image: DecorationImage(
+                            image: AssetImage(
+                                "assets/images/todays_deals/${todaysDeals[index]}"),
+                            fit: BoxFit.contain),
+                      ),
+                    ),
+                  );
+                }),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                "See all Deals",
+                style: textTheme.bodySmall!.copyWith(color: blue),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -137,13 +298,12 @@ class _HomeScreenState extends State<HomeScreen> {
 class HomeScreenBanner extends StatelessWidget {
   const HomeScreenBanner({
     super.key,
-    required this.height,
   });
-
-  final double height;
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    // final width = MediaQuery.of(context).size.width;
     return CarouselSlider(
       options: CarouselOptions(
           height: height * 0.28, autoPlay: true, viewportFraction: 1),
@@ -171,15 +331,12 @@ class HomeScreenBanner extends StatelessWidget {
 class HomeScreenCategoriesList extends StatelessWidget {
   const HomeScreenCategoriesList({
     super.key,
-    required this.height,
-    required this.width,
   });
-
-  final double height;
-  final double width;
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return SizedBox(
       height: height * 0.1,
       width: width,
@@ -199,7 +356,7 @@ class HomeScreenCategoriesList extends StatelessWidget {
                 ),
                 Text(
                   categories[index],
-                  style: TextStyle(fontSize: 10),
+                  style: const TextStyle(fontSize: 10),
                 ),
               ],
             ),
@@ -213,15 +370,12 @@ class HomeScreenCategoriesList extends StatelessWidget {
 class HomeScreenUserAddressBar extends StatelessWidget {
   const HomeScreenUserAddressBar({
     super.key,
-    required this.height,
-    required this.width,
   });
-
-  final double height;
-  final double width;
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Container(
       height: height * 0.06,
       width: width,
@@ -239,15 +393,12 @@ class HomeScreenUserAddressBar extends StatelessWidget {
 class HomePageAppBar extends StatelessWidget {
   const HomePageAppBar({
     super.key,
-    required this.width,
-    required this.height,
   });
-
-  final double width;
-  final double height;
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: width * 0.03, vertical: height * 0.01),

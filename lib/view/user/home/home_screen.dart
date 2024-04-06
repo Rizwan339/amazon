@@ -70,48 +70,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   dealPicsNames: headphonesDeals,
                   offerFor: 'headphones'),
               CommonFunctions.divider(),
-              Container(
-                height: height * 0.4,
-                width: width,
-                child: const Image(
-                  image: AssetImage(
-                      "assets/images/offersNsponcered/insurance.png"),
-                  fit: BoxFit.fill,
-                ),
-              ),
+              HomeScreenAdsWidget(height: height, width: width),
               gridViewDealsMethod(
                   title: 'Minimum 70% Off | Top Offers on Clothing',
                   textButtonName: 'See all Deals',
                   dealPicsNames: clothingDealsList,
                   offerFor: 'clothing'),
               CommonFunctions.divider(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CommonFunctions.blankSpace(height * 0.01, 0),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.03),
-                    child: Text(
-                      'Watch Sixer only on MiniTV',
-                      style: textTheme.bodySmall!
-                          .copyWith(fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Container(
-                    height: height * 0.45,
-                    width: width,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.03,
-                      vertical: height * 0.01,
-                    ),
-                    child: const Image(
-                      image: AssetImage(
-                          "assets/images/offersNsponcered/sixer.png"),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
-              )
+              HomeScreenMiniTvWidget(
+                  height: height, width: width, textTheme: textTheme)
             ],
           ),
         ),
@@ -169,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ? gridHeadphoneDealsFunc(index)
                             : gridClothingDealsFunc(index),
                         style: textTheme.labelMedium,
-                      )
+                      ),
                     ],
                   ),
                 );
@@ -182,6 +149,71 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class HomeScreenMiniTvWidget extends StatelessWidget {
+  const HomeScreenMiniTvWidget({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.textTheme,
+  });
+
+  final double height;
+  final double width;
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CommonFunctions.blankSpace(height * 0.01, 0),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+          child: Text(
+            'Watch Sixer only on MiniTV',
+            style: textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600),
+          ),
+        ),
+        Container(
+          height: height * 0.5,
+          width: width,
+          padding: EdgeInsets.symmetric(
+            horizontal: width * 0.03,
+            vertical: height * 0.01,
+          ),
+          child: const Image(
+            image: AssetImage("assets/images/offersNsponcered/sixer.png"),
+            fit: BoxFit.fill,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class HomeScreenAdsWidget extends StatelessWidget {
+  const HomeScreenAdsWidget({
+    super.key,
+    required this.height,
+    required this.width,
+  });
+
+  final double height;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: height * 0.4,
+      width: width,
+      child: const Image(
+        image: AssetImage("assets/images/offersNsponcered/insurance.png"),
+        fit: BoxFit.fill,
       ),
     );
   }

@@ -67,54 +67,214 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 CommonFunctions.blankSpace(height * 0.01, 0),
                 ProfileScreenGridButtons(width: width, textTheme: textTheme),
                 CommonFunctions.blankSpace(height * 0.02, 0),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.04, vertical: height * 0.01),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Your Orders',
-                            style: textTheme.bodyMedium!
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text(
-                              'See all',
-                              style: textTheme.bodySmall!.copyWith(color: blue),
-                            ),
-                          ),
-                        ],
-                      ),
-                      CommonFunctions.blankSpace(height * 0.01, 0),
-                      SizedBox(
-                        height: height * 0.18,
-                        child: ListView.builder(
-                          itemCount: 5,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: width * 0.02),
-                              width: width * 0.4,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: greyShade3),
-                                  borderRadius: BorderRadius.circular(10)),
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                )
+                ProfileScreenOrders(
+                    width: width, height: height, textTheme: textTheme),
+                CommonFunctions.blankSpace(height * 0.01, 0),
+                CommonFunctions.divider(),
+                ProfileScreenKeepShoppingWidget(
+                    width: width, height: height, textTheme: textTheme),
+                CommonFunctions.divider(),
+                ProfileScreenBuyAgain(
+                    width: width, height: height, textTheme: textTheme)
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ProfileScreenKeepShoppingWidget extends StatelessWidget {
+  const ProfileScreenKeepShoppingWidget({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.textTheme,
+  });
+
+  final double width;
+  final double height;
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: width * 0.03, vertical: height * 0.01),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Keep Shopping For',
+                style:
+                    textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
+              ),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  'Browsing history',
+                  style: textTheme.bodySmall!.copyWith(color: blue),
+                ),
+              ),
+            ],
+          ),
+          CommonFunctions.blankSpace(height * 0.02, 0),
+          GridView.builder(
+            itemCount: 5,
+            shrinkWrap: true,
+            physics: const PageScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 8,
+                childAspectRatio: 0.9),
+            itemBuilder: (context, index) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: width * 0.4,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: greyShade3),
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
+                  Text(
+                    'Product',
+                    style: textTheme.titleSmall,
+                  ),
+                ],
+              );
+            },
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileScreenBuyAgain extends StatelessWidget {
+  const ProfileScreenBuyAgain({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.textTheme,
+  });
+
+  final double width;
+  final double height;
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: width * 0.04, vertical: height * 0.01),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Buy Again',
+                style:
+                    textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
+              ),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  'See all',
+                  style: textTheme.bodySmall!.copyWith(color: blue),
+                ),
+              ),
+            ],
+          ),
+          CommonFunctions.blankSpace(height * 0.02, 0),
+          SizedBox(
+            height: height * 0.16,
+            child: ListView.builder(
+              itemCount: 5,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              physics: const PageScrollPhysics(),
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: width * 0.01),
+                  width: height * 0.16,
+                  height: height * 0.16,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: greyShade3),
+                      borderRadius: BorderRadius.circular(10)),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileScreenOrders extends StatelessWidget {
+  const ProfileScreenOrders({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.textTheme,
+  });
+
+  final double width;
+  final double height;
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: width * 0.04, vertical: height * 0.01),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Your Orders',
+                style:
+                    textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
+              ),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  'See all',
+                  style: textTheme.bodySmall!.copyWith(color: blue),
+                ),
+              ),
+            ],
+          ),
+          CommonFunctions.blankSpace(height * 0.02, 0),
+          SizedBox(
+            height: height * 0.18,
+            child: ListView.builder(
+              itemCount: 5,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              physics: const PageScrollPhysics(),
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: width * 0.02),
+                  width: width * 0.4,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: greyShade3),
+                      borderRadius: BorderRadius.circular(10)),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

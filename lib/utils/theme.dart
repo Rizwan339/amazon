@@ -40,6 +40,10 @@ final themeData = ThemeData(
       color: Colors.black,
       fontSize: 12,
     ),
+    titleMedium: TextStyle(
+      color: Colors.black,
+      fontSize: 14,
+    ),
   ),
   inputDecorationTheme: InputDecorationTheme(
     enabledBorder: OutlineInputBorder(

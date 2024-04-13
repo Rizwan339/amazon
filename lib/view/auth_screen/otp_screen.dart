@@ -77,6 +77,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   ),
                 ),
               ),
+              CommonFunctions.blankSpace(height * 0.01, 0),
               CommonAuthButton(
                 buttonwidth: 0.99,
                 title: 'Continue',

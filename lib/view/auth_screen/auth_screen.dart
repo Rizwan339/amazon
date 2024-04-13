@@ -239,7 +239,8 @@ class _AuthScreenState extends State<AuthScreen> {
                       width: width * 0.68,
                       child: TextFormField(
                         controller: mobileController,
-                        style: textTheme.bodyLarge,
+                        cursorColor: black,
+                        style: textTheme.bodyLarge!.copyWith(height: 1.2),
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                             hintText: 'Mobile Number',
@@ -364,6 +365,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   height: height * 0.06,
                   child: TextField(
                     controller: nameController,
+                    cursorHeight: 25,
+                    cursorColor: black,
+                    style: textTheme.bodyLarge!.copyWith(height: 1.5),
                     decoration: InputDecoration(
                       hintText: 'First and Last Name',
                       hintStyle: textTheme.labelLarge,
@@ -412,10 +416,10 @@ class _AuthScreenState extends State<AuthScreen> {
                       height: height * 0.07,
                       width: width * 0.68,
                       child: TextFormField(
-                        cursorHeight: 20,
+                        cursorHeight: 25,
                         controller: mobileController,
                         cursorColor: black,
-                        style: textTheme.bodyLarge,
+                        style: textTheme.bodyLarge!.copyWith(height: 1.5),
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: 'Mobile number',

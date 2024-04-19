@@ -19,7 +19,7 @@ class SignInLogic extends StatefulWidget {
 class _SignInLogicState extends State<SignInLogic> {
   checkUser() async {
     bool userExist = await UserDataCrud.checkUser();
-    log(userExist.toString());
+    log('User Exist : ${userExist.toString()}');
     if (userExist == true) {
       if (!mounted) return;
       Navigator.push(
@@ -40,6 +40,7 @@ class _SignInLogicState extends State<SignInLogic> {
 
   checkAuthentication() {
     bool userIsAuthenticated = AuthServices.chekAuthentication();
+    log('User is authenticated : ${userIsAuthenticated.toString()}');
     userIsAuthenticated
         ? checkUser()
         : Navigator.pushAndRemoveUntil(
@@ -55,7 +56,6 @@ class _SignInLogicState extends State<SignInLogic> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       checkAuthentication();
-      checkUser();
     });
   }
 

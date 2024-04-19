@@ -1,9 +1,16 @@
 import 'dart:developer';
 import 'package:amazon/constants/common_functions.dart';
 import 'package:amazon/constants/constants.dart';
+import 'package:amazon/controller/provider/auth_provider/address_provider/address_provider.dart';
+import 'package:amazon/controller/user_data_crud_services/user_data_crud_services.dart';
+import 'package:amazon/model/address_model.dart';
 import 'package:amazon/utils/colors.dart';
+import 'package:amazon/view/user/address_screen/user_address_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +21,98 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   CarouselController todaysDealController = CarouselController();
+
+  checkUserAddress() async {
+    bool userAddressPresent = await UserDataCrud.checkUsersAddress();
+    log('user Address Present : ${userAddressPresent.toString()}');
+    if (!mounted) return;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final textTheme = Theme.of(context).textTheme;
+
+    if (userAddressPresent == false) {
+      showModalBottomSheet(
+        backgroundColor: transparent,
+        context: context,
+        builder: (context) {
+          return Container(
+            height: height * 0.4,
+            padding: EdgeInsets.symmetric(
+                vertical: height * 0.04, horizontal: width * 0.03),
+            width: width,
+            decoration: BoxDecoration(
+                color: white,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                )),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Add Address',
+                  style: textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                CommonFunctions.blankSpace(height * 0.01, 0),
+                SizedBox(
+                  height: height * 0.2,
+                  child: ListView.builder(
+                    itemCount: 1,
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          if (index == 0) {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: const UserAddressScreen(),
+                                    type: PageTransitionType.rightToLeft));
+                          }
+                        },
+                        child: Container(
+                          width: width * 0.3,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 0.02,
+                              vertical: height * 0.01),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: greyShade3)),
+                          child: Builder(
+                            builder: (context) {
+                              if (index == 0) {
+                                return Text(
+                                  'Add Address',
+                                  style: textTheme.bodySmall!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: greyShade3),
+                                );
+                              }
+                              return Text(
+                                'Add Address',
+                                style: textTheme.bodySmall!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: greyShade3),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+  }
+
   gridHeadphoneDealsFunc(int index) {
     switch (index) {
       case 0:
@@ -38,6 +137,16 @@ class _HomeScreenState extends State<HomeScreen> {
       case 3:
         return "View all";
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      checkUserAddress();
+      context.read<AddressProvider>().getCurrentSelectedAddress();
+    });
   }
 
   @override
@@ -408,6 +517,7 @@ class HomeScreenUserAddressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       height: height * 0.06,
       width: width,
@@ -417,6 +527,49 @@ class HomeScreenUserAddressBar extends StatelessWidget {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
+      ),
+      child: Consumer<AddressProvider>(
+        builder: (context, addressProvider, child) {
+          if (addressProvider.fetchedCurrentSelectedAddress == true) {
+            AddressModel selectedAddress =
+                addressProvider.currentSelectedAddress;
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 6),
+                  child: Icon(
+                    Icons.location_pin,
+                    color: black,
+                  ),
+                ),
+                CommonFunctions.blankSpace(0, width * .02),
+                Text(
+                  'Deleiver to ${selectedAddress.name} - ${selectedAddress.town}, ${selectedAddress.state}',
+                  style: textTheme.bodySmall,
+                )
+              ],
+            );
+          } else {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 6),
+                  child: Icon(
+                    Icons.location_pin,
+                    color: black,
+                  ),
+                ),
+                CommonFunctions.blankSpace(0, width * .02),
+                Text(
+                  'Deleiver to User - City, State',
+                  style: textTheme.bodySmall,
+                )
+              ],
+            );
+          }
+        },
       ),
     );
   }

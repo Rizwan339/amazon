@@ -25,7 +25,8 @@ class _SignInLogicState extends State<SignInLogic> {
       Navigator.push(
         context,
         PageTransition(
-            child: BottomNavBar(), type: PageTransitionType.rightToLeft),
+            child: const UserBottomNavBar(),
+            type: PageTransitionType.rightToLeft),
       );
     } else {
       if (!mounted) return;

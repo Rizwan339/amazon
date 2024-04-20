@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:amazon/constants/common_functions.dart';
 import 'package:amazon/constants/constants.dart';
-import 'package:amazon/controller/provider/auth_provider/address_provider/address_provider.dart';
+import 'package:amazon/controller/provider/address_provider/address_provider.dart';
 import 'package:amazon/controller/user_data_crud_services/user_data_crud_services.dart';
 import 'package:amazon/model/address_model.dart';
 import 'package:amazon/utils/colors.dart';
@@ -530,7 +530,8 @@ class HomeScreenUserAddressBar extends StatelessWidget {
       ),
       child: Consumer<AddressProvider>(
         builder: (context, addressProvider, child) {
-          if (addressProvider.fetchedCurrentSelectedAddress == true) {
+          if (addressProvider.fetchedCurrentSelectedAddress &&
+              addressProvider.addressPresent) {
             AddressModel selectedAddress =
                 addressProvider.currentSelectedAddress;
             return Row(

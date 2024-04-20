@@ -45,6 +45,10 @@ dependencies:
   carousel_slider: ^4.2.1
   cloud_firestore: ^4.15.8
   uuid: ^4.4.0
+  firebase_storage: 11.6.9
+  image_picker: ^1.0.8
+  flutter_reference: ^0.0.5
+
 
 dev_dependencies:
   flutter_test:

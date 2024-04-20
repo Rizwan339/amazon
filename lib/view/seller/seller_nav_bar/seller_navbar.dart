@@ -1,54 +1,34 @@
-import 'package:flutter/cupertino.dart';
+import 'package:amazon/view/seller/inventory/inventory_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../../../utils/colors.dart';
-import '../cart/cart.dart';
-import '../home/home_screen.dart';
-import '../menu/menu.dart';
-import '../profile/profile.dart';
+import '../monitor/monitor_screen.dart';
 
-class UserBottomNavBar extends StatefulWidget {
-  const UserBottomNavBar({super.key});
+class SellerNavBar extends StatefulWidget {
+  const SellerNavBar({super.key});
 
   @override
-  State<UserBottomNavBar> createState() => _UserBottomNavBarState();
+  State<SellerNavBar> createState() => _SellerNavBarState();
 }
 
-class _UserBottomNavBarState extends State<UserBottomNavBar> {
+class _SellerNavBarState extends State<SellerNavBar> {
   PersistentTabController controller = PersistentTabController(initialIndex: 0);
 
   List<Widget> _buildScreens() {
-    return [
-      const HomeScreen(),
-      const ProfileScreen(),
-      const CartScreen(),
-      const Menu()
-    ];
+    return [const InventoryScreen(), const MonitorScreen()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.home),
-        title: "Home",
+        icon: const Icon(Icons.inventory_2_outlined),
+        title: "Inventory",
         activeColorPrimary: teal,
         inactiveColorPrimary: black,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.person),
-        title: "You",
-        activeColorPrimary: teal,
-        inactiveColorPrimary: black,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.cart),
-        title: "Cart",
-        activeColorPrimary: teal,
-        inactiveColorPrimary: black,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.menu),
-        title: "Menu",
+        icon: const Icon(Icons.bar_chart_outlined),
+        title: "Monitor",
         activeColorPrimary: teal,
         inactiveColorPrimary: black,
       ),

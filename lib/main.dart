@@ -37,7 +37,7 @@ class Amazon extends StatelessWidget {
         // home: const AddProductsScreen(),
         home: const SignInLogic(),
         // home: const SellerNavBar(),
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: true,
       ),
     );
   }

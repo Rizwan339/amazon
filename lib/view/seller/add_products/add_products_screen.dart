@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:amazon/constants/constants.dart';
 import 'package:amazon/controller/provider/product_provider/product_provider.dart';
 import 'package:amazon/utils/colors.dart';
@@ -52,70 +54,70 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
               horizontal: width * 0.01, vertical: height * 0.02),
           child: Column(
             children: [
-              Builder(
-                builder: (context) {
-                  if (context.read<ProductProvider>().productImages.isEmpty) {
-                    return InkWell(
-                      onTap: () {
-                        context
-                            .read<ProductProvider>()
-                            .fetchProductImagesFromGallery(context: context);
-                      },
-                      child: Container(
-                        height: height * 0.25,
-                        width: width,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: greyShade3)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.add,
-                              size: height * 0.08,
-                              color: greyShade3,
-                            ),
-                            Text(
-                              'Add Products',
-                              style: textTheme.bodyMedium!
-                                  .copyWith(color: greyShade3),
-                            )
-                          ],
+              Consumer<ProductProvider>(
+                  builder: (context, productProvider, child) {
+                return Builder(
+                  builder: (context) {
+                    if (productProvider.productImages.isEmpty) {
+                      return InkWell(
+                        onTap: () {
+                          context
+                              .read<ProductProvider>()
+                              .fetchProductImagesFromGallery(context: context);
+                        },
+                        child: Container(
+                          height: height * 0.25,
+                          width: width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: greyShade3)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.add,
+                                size: height * 0.08,
+                                color: greyShade3,
+                              ),
+                              Text(
+                                'Add Products',
+                                style: textTheme.bodyMedium!
+                                    .copyWith(color: greyShade3),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                  return Container(
-                    height: height * 0.25,
-                    width: width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: greyShade3)),
-                  );
-                },
-              ),
-              // CarouselSlider(
-              //   options: CarouselOptions(
-              //       height: height * 0.28, autoPlay: true, viewportFraction: 1),
-              //   items: carouselPictures.map((i) {
-              //     return Builder(
-              //       builder: (BuildContext context) {
-              //         return Container(
-              //           width: MediaQuery.of(context).size.width,
-              //           // margin: EdgeInsets.symmetric(horizontal: 5.0),
-              //           decoration: BoxDecoration(
-              //             color: Colors.amber,
-              //             image: DecorationImage(
-              //               image: AssetImage(
-              //                   "assets/images/carousel_slideshow/$i"),
-              //               fit: BoxFit.cover,
-              //             ),
-              //           ),
-              //         );
-              //       },
-              //     );
-              //   }).toList(),
-              // ),
+                      );
+                    } else {
+                      List<File> images =
+                          context.read<ProductProvider>().productImages;
+                      return CarouselSlider(
+                        options: CarouselOptions(
+                            height: height * 0.28,
+                            autoPlay: true,
+                            viewportFraction: 1),
+                        items: images.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                // margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                decoration: BoxDecoration(
+                                  color: white,
+                                  image: DecorationImage(
+                                    image: FileImage(File(i.path)),
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }).toList(),
+                      );
+                    }
+                  },
+                );
+              }),
             ],
           ),
         ),

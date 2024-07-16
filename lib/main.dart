@@ -34,8 +34,8 @@ class Amazon extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: themeData,
-        // home: const AddProductsScreen(),
-        home: const SignInLogic(),
+        home: const AddProductsScreen(),
+        // home: const SignInLogic(),
         // home: const SellerNavBar(),
         debugShowCheckedModeBanner: true,
       ),

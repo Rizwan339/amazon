@@ -5,6 +5,7 @@ import 'package:amazon/controller/provider/address_provider/address_provider.dar
 import 'package:amazon/controller/user_data_crud_services/user_data_crud_services.dart';
 import 'package:amazon/model/address_model.dart';
 import 'package:amazon/utils/colors.dart';
+import 'package:amazon/view/seller/add_products/add_products_screen.dart';
 import 'package:amazon/view/user/address_screen/user_address_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

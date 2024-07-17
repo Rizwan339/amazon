@@ -2,8 +2,8 @@ import 'package:amazon/constants/common_functions.dart';
 import 'package:amazon/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class AddProductTextField extends StatelessWidget {
-  const AddProductTextField(
+class AddressScreenTextField extends StatelessWidget {
+  const AddressScreenTextField(
       {super.key,
       required this.textController,
       required this.title,

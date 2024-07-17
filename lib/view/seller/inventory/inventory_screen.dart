@@ -1,5 +1,7 @@
 import 'package:amazon/utils/colors.dart';
+import 'package:amazon/view/seller/add_products/add_products_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({super.key});
@@ -18,7 +20,13 @@ class _InventoryScreenState extends State<InventoryScreen> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: const AddProductsScreen(),
+                    type: PageTransitionType.rightToLeft));
+          },
           backgroundColor: amber,
           child: Icon(
             Icons.add,
@@ -64,7 +72,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                 ],
               ),
             )),
-        body: Center(
+        body: const Center(
           child: Text('Inventory'),
         ),
       ),

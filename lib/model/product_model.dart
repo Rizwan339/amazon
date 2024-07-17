@@ -3,12 +3,13 @@ import 'dart:convert';
 class ProductModel {
   final List<String>? productImagesURL;
   final String? productName;
+  final String? category;
   final String? productDescriptions;
   final String? brandName;
   final String? manufactrerName;
   final String? countryOfOrigin;
   final String? productSpecifications;
-  final String? productPrice;
+  final double? productPrice;
   final String? productID;
   final String? productSellerID;
   final bool? inStock;
@@ -16,6 +17,7 @@ class ProductModel {
   ProductModel({
     this.productImagesURL,
     this.productName,
+    this.category,
     this.productDescriptions,
     this.brandName,
     this.manufactrerName,
@@ -31,6 +33,7 @@ class ProductModel {
     return {
       'productImagesURL': productImagesURL,
       'productName': productName,
+      'category': category,
       'productDescriptions': productDescriptions,
       'brandName': brandName,
       'manufactrerName': manufactrerName,
@@ -47,6 +50,7 @@ class ProductModel {
     return ProductModel(
       productImagesURL: List<String>.from(map['productImagesURL']),
       productName: map['productName'],
+      category: map['category'],
       productDescriptions: map['productDescriptions'],
       brandName: map['brandName'],
       manufactrerName: map['manufactrerName'],

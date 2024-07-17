@@ -1,9 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:io';
 import 'package:amazon/constants/common_functions.dart';
+import 'package:amazon/controller/provider/product_provider/product_provider.dart';
+import 'package:amazon/model/product_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import '../../../constants/constants.dart';
 
@@ -45,5 +50,31 @@ class ProductServices {
         imagesUrl.add(imageUrl);
       },
     );
+    log(imagesUrl.toList().toString());
+    context
+        .read<ProductProvider>()
+        .updateProductImagesUrl(imageUrls: imagesUrl);
+  }
+
+  static Future addProduct({
+    required BuildContext context,
+    required ProductModel productModel,
+  }) async {
+    try {
+      await firestore
+          .collection('Products')
+          .doc(productModel.productID)
+          .set(productModel.toMap())
+          .whenComplete(() {
+        log('Data Added');
+        Navigator.pop(context);
+        CommonFunctions.showToast(
+            context: context, message: 'Product Added Successfully');
+      });
+    } catch (e) {
+      log(e.toString());
+      if (!context.mounted) return;
+      CommonFunctions.showToast(context: context, message: e.toString());
+    }
   }
 }

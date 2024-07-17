@@ -12,9 +12,8 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  uploadProductImagesToFirebaseStorage({required BuildContext context}) async {
-    productImagesUrl = await ProductServices.uploadImageToFirebaseStorage(
-        images: productImages, context: context);
+  updateProductImagesUrl({required List<String> imageUrls}) async {
+    productImagesUrl = imageUrls;
     notifyListeners();
   }
 }

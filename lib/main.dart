@@ -29,15 +29,15 @@ class Amazon extends StatelessWidget {
         ChangeNotifierProvider<AuthProviders>(create: (_) => AuthProviders()),
         ChangeNotifierProvider<AddressProvider>(
             create: (_) => AddressProvider()),
-        ChangeNotifierProvider<ProductProvider>(
-            create: (_) => ProductProvider()),
+        ChangeNotifierProvider<SellerProductProvider>(
+            create: (_) => SellerProductProvider()),
       ],
       child: MaterialApp(
         theme: themeData,
         // home: const AddProductsScreen(),
-        // home: const SignInLogic(),
-        home: const SellerNavBar(),
-        debugShowCheckedModeBanner: true,
+        home: const SignInLogic(),
+        // home: const SellerNavBar(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

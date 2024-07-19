@@ -52,6 +52,25 @@ class UserDataCrud {
     return userPresence;
   }
 
+  static Future<bool> userIsSeller() async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snapshot = await firestore
+          .collection('users')
+          .doc(auth.currentUser!.phoneNumber)
+          .get();
+      if (snapshot.exists) {
+        UserModel userModel = UserModel.fromMap(snapshot.data()!);
+        log('User Type is: ${userModel.userType}');
+        if (userModel.userType != 'user') {
+          return true;
+        }
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    return false;
+  }
+
   static Future addUserAddress(
       {required BuildContext context,
       required AddressModel addressModel,

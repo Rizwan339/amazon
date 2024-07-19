@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:amazon/constants/common_functions.dart';
 import 'package:amazon/controller/provider/product_provider/product_provider.dart';
 import 'package:amazon/model/product_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class ProductServices {
     );
     log(imagesUrl.toList().toString());
     context
-        .read<ProductProvider>()
+        .read<SellerProductProvider>()
         .updateProductImagesUrl(imageUrls: imagesUrl);
   }
 
@@ -76,5 +77,25 @@ class ProductServices {
       if (!context.mounted) return;
       CommonFunctions.showToast(context: context, message: e.toString());
     }
+  }
+
+  static Future<List<ProductModel>> getSellersProducts() async {
+    List<ProductModel> sellersproducts = [];
+
+    try {
+      final QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+          .collection('Products')
+          .where('productSellerID', isEqualTo: auth.currentUser!.phoneNumber)
+          .get();
+
+      snapshot.docs.forEach((element) {
+        sellersproducts.add(ProductModel.fromMap(element.data()));
+        ProductModel products = ProductModel.fromMap(element.data());
+      });
+    } catch (e) {
+      log('Error found');
+      log(e.toString());
+    }
+    return sellersproducts;
   }
 }

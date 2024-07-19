@@ -48,19 +48,19 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
   }
 
   onPressed() async {
-    if (context.read<ProductProvider>().productImages.isNotEmpty) {
+    if (context.read<SellerProductProvider>().productImages.isNotEmpty) {
       setState(() {
         addProductbuttonPressed = true;
       });
       await ProductServices.uploadImageToFirebaseStorage(
-          images: context.read<ProductProvider>().productImages,
+          images: context.read<SellerProductProvider>().productImages,
           context: context);
       Uuid uuid = const Uuid();
       String sellerID = auth.currentUser!.phoneNumber!;
       String productID = '$sellerID${uuid.v1()}';
 
       List<String> imagesURLs =
-          context.read<ProductProvider>().productImagesUrl;
+          context.read<SellerProductProvider>().productImagesUrl;
       ProductModel model = ProductModel(
           productImagesURL: imagesURLs,
           productName: productNameController.text.trim(),
@@ -251,7 +251,7 @@ class ProductImageBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProductProvider>(
+    return Consumer<SellerProductProvider>(
         builder: (context, productProvider, child) {
       return Builder(
         builder: (context) {
@@ -259,7 +259,7 @@ class ProductImageBanner extends StatelessWidget {
             return InkWell(
               onTap: () {
                 context
-                    .read<ProductProvider>()
+                    .read<SellerProductProvider>()
                     .fetchProductImagesFromGallery(context: context);
               },
               child: Container(
@@ -285,7 +285,8 @@ class ProductImageBanner extends StatelessWidget {
               ),
             );
           } else {
-            List<File> images = context.read<ProductProvider>().productImages;
+            List<File> images =
+                context.read<SellerProductProvider>().productImages;
             return CarouselSlider(
               options: CarouselOptions(
                   height: height * 0.28, autoPlay: true, viewportFraction: 1),

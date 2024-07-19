@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:amazon/controller/services/auth_services/auth_services.dart';
 import 'package:amazon/controller/user_data_crud_services/user_data_crud_services.dart';
 import 'package:amazon/view/auth_screen/auth_screen.dart';
+import 'package:amazon/view/seller/seller_nav_bar/seller_navbar.dart';
 import 'package:amazon/view/user/user_data_screen/user_data_input_screen.dart';
 import 'package:amazon/view/user/user_navbar/user_navbar.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +22,25 @@ class _SignInLogicState extends State<SignInLogic> {
     bool userExist = await UserDataCrud.checkUser();
     log('User Exist : ${userExist.toString()}');
     if (userExist == true) {
-      if (!mounted) return;
-      Navigator.push(
-        context,
-        PageTransition(
-            child: const UserBottomNavBar(),
-            type: PageTransitionType.rightToLeft),
-      );
+      bool userIsSeller = await UserDataCrud.userIsSeller();
+      log('start');
+      log(userIsSeller.toString());
+      if (userIsSeller == true) {
+        if (!mounted) return;
+        Navigator.push(
+            context,
+            PageTransition(
+                child: const SellerNavBar(),
+                type: PageTransitionType.rightToLeft));
+      } else {
+        if (!mounted) return;
+        Navigator.push(
+          context,
+          PageTransition(
+              child: const UserBottomNavBar(),
+              type: PageTransitionType.rightToLeft),
+        );
+      }
     } else {
       if (!mounted) return;
       Navigator.push(

@@ -7,6 +7,7 @@ import 'package:amazon/model/address_model.dart';
 import 'package:amazon/utils/colors.dart';
 import 'package:amazon/view/seller/add_products/add_products_screen.dart';
 import 'package:amazon/view/user/address_screen/user_address_screen.dart';
+import 'package:amazon/view/user/product_display_screen/product_display_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -599,40 +600,45 @@ class HomePageAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(
-            width: width * 0.79,
-            child: TextField(
+          InkWell(
               onTap: () {
-                log('Redirecting you to product search screen');
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const ProductDisplayScreen(),
+                        type: PageTransitionType.rightToLeft));
               },
-              cursorColor: black,
-              cursorHeight: 20,
-              style: const TextStyle(height: 1),
-              decoration: InputDecoration(
-                fillColor: white,
-                filled: true,
-                hintText: 'Search Amazon.in',
-                prefixIcon: IconButton(
-                    onPressed: () {},
-                    padding: EdgeInsets.zero,
-                    icon: Icon(
+              child: Container(
+                width: width * 0.8,
+                height: height * 0.06,
+                padding: EdgeInsets.symmetric(horizontal: width * 0.04),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: grey),
+                  color: white,
+                ),
+                child: Row(
+                  children: [
+                    Icon(
                       Icons.search,
                       color: black,
-                    )),
-                suffixIcon: IconButton(
-                    onPressed: () {},
-                    padding: EdgeInsets.zero,
-                    icon: Icon(
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: width * 0.03),
+                      child: Text('Search Amazon.in',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(color: grey)),
+                    ),
+                    const Spacer(),
+                    Icon(
                       Icons.camera_alt_sharp,
                       color: grey,
-                    )),
-                contentPadding: EdgeInsets.symmetric(horizontal: width * 0.03),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: grey)),
-              ),
-            ),
-          ),
+                    ),
+                  ],
+                ),
+              )),
           IconButton(
               onPressed: () {},
               icon: Icon(

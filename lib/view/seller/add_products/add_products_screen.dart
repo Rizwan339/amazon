@@ -33,6 +33,7 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
   TextEditingController productPriceController = TextEditingController();
   TextEditingController productIDController = TextEditingController();
   TextEditingController productSellerIDController = TextEditingController();
+  TextEditingController discountedPriceController = TextEditingController();
 
   String dropDownValue = 'Select Category';
   bool addProductbuttonPressed = false;
@@ -73,6 +74,8 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
           productPrice: double.parse(productPriceController.text.trim()),
           productID: productID,
           productSellerID: sellerID,
+          discountedPrice: double.parse(discountedPriceController.text.trim()),
+          uploadedAt: DateTime.now(),
           inStock: true);
 
       await ProductServices.addProduct(context: context, productModel: model);
@@ -192,8 +195,13 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
         CommonFunctions.blankSpace(height * 0.01, 0),
         AddProductTextField(
             textController: productPriceController,
-            title: 'Product Price',
+            title: 'Original Price',
             hintText: 'Price'),
+        CommonFunctions.blankSpace(height * 0.01, 0),
+        AddProductTextField(
+            textController: discountedPriceController,
+            title: 'Discounted Price',
+            hintText: 'Discounted Price'),
         CommonFunctions.blankSpace(height * 0.01, 0),
       ],
     );

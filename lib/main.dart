@@ -1,6 +1,7 @@
 import 'package:amazon/controller/provider/address_provider/address_provider.dart';
 import 'package:amazon/controller/provider/auth_provider/auth_provider.dart';
 import 'package:amazon/controller/provider/product_provider/product_provider.dart';
+import 'package:amazon/controller/provider/users_product_provider/users_product_provider.dart';
 import 'package:amazon/utils/theme.dart';
 import 'package:amazon/view/auth_screen/signInLogic.dart';
 import 'package:amazon/view/seller/add_products/add_products_screen.dart';
@@ -31,6 +32,8 @@ class Amazon extends StatelessWidget {
             create: (_) => AddressProvider()),
         ChangeNotifierProvider<SellerProductProvider>(
             create: (_) => SellerProductProvider()),
+        ChangeNotifierProvider<UsersProductProvider>(
+            create: (_) => UsersProductProvider()),
       ],
       child: MaterialApp(
         theme: themeData,

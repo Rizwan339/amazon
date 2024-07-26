@@ -10,8 +10,11 @@ class ProductModel {
   final String? countryOfOrigin;
   final String? productSpecifications;
   final double? productPrice;
+  final double? discountedPrice;
   final String? productID;
   final String? productSellerID;
+  final int? discountPercentage;
+  final DateTime? uploadedAt;
   final bool? inStock;
 
   ProductModel({
@@ -24,8 +27,11 @@ class ProductModel {
     this.countryOfOrigin,
     this.productSpecifications,
     this.productPrice,
+    this.discountedPrice,
     this.productID,
     this.productSellerID,
+    this.discountPercentage,
+    this.uploadedAt,
     this.inStock,
   });
 
@@ -40,8 +46,11 @@ class ProductModel {
       'countryOfOrigin': countryOfOrigin,
       'productSpecifications': productSpecifications,
       'productPrice': productPrice,
+      'discountedPrice': discountedPrice,
       'productID': productID,
       'productSellerID': productSellerID,
+      'discountPercentage': discountPercentage,
+      'uploadedAt': uploadedAt?.millisecondsSinceEpoch,
       'inStock': inStock,
     };
   }
@@ -56,9 +65,14 @@ class ProductModel {
       manufactrerName: map['manufactrerName'],
       countryOfOrigin: map['countryOfOrigin'],
       productSpecifications: map['productSpecifications'],
-      productPrice: map['productPrice'],
+      productPrice: map['productPrice']?.toDouble(),
+      discountedPrice: map['discountedPrice']?.toDouble(),
       productID: map['productID'],
+      discountPercentage: map['discountPercentage'],
       productSellerID: map['productSellerID'],
+      uploadedAt: map['uploadedAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['uploadedAt'])
+          : null,
       inStock: map['inStock'],
     );
   }

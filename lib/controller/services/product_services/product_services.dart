@@ -85,17 +85,20 @@ class ProductServices {
     try {
       final QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
           .collection('Products')
+          .orderBy('uploadedAt', descending: true)
           .where('productSellerID', isEqualTo: auth.currentUser!.phoneNumber)
           .get();
 
-      snapshot.docs.forEach((element) {
+      for (var element in snapshot.docs) {
         sellersproducts.add(ProductModel.fromMap(element.data()));
-        ProductModel products = ProductModel.fromMap(element.data());
-      });
+        // ProductModel products = ProductModel.fromMap(element.data());
+      }
+      log(sellersproducts.toList().toString());
     } catch (e) {
       log('Error found');
       log(e.toString());
     }
+    log(sellersproducts.toList().toString());
     return sellersproducts;
   }
 }

@@ -90,120 +90,126 @@ class _InventoryScreenState extends State<InventoryScreen> {
           width: width,
           padding: EdgeInsets.symmetric(
               horizontal: width * 0.03, vertical: height * 0.02),
-          child: Column(
-            children: [
-              Consumer<SellerProductProvider>(
-                  builder: (context, sellerProductProvider, child) {
-                if (sellerProductProvider.sellerProductsFetched == false) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (sellerProductProvider.products.isEmpty) {
-                  return Center(
-                    child: Text(
-                      'No Products Found',
-                      style: textTheme.bodyMedium,
-                    ),
-                  );
-                }
-                return ListView.builder(
-                    itemCount: sellerProductProvider.products.length,
-                    shrinkWrap: true,
-                    physics: const PageScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      ProductModel currentModel =
-                          sellerProductProvider.products[index];
-                      return Container(
-                        height: height * 0.32,
-                        width: width,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: width * 0.02, vertical: height * 0.01),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: grey)),
-                        child: Column(
-                          children: [
-                            CarouselSlider(
-                              options: CarouselOptions(
-                                  height: height * 0.2,
-                                  autoPlay: true,
-                                  viewportFraction: 1),
-                              items: currentModel.productImagesURL!.map((i) {
-                                return Builder(
-                                  builder: (BuildContext context) {
-                                    return Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                        color: white,
-                                        image: DecorationImage(
-                                          image: NetworkImage(i),
-                                          fit: BoxFit.contain,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Consumer<SellerProductProvider>(
+                    builder: (context, sellerProductProvider, child) {
+                  if (sellerProductProvider.sellerProductsFetched == false) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (sellerProductProvider.products.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'No Products Found',
+                        style: textTheme.bodyMedium,
+                      ),
+                    );
+                  }
+                  return ListView.builder(
+                      itemCount: sellerProductProvider.products.length,
+                      shrinkWrap: true,
+                      physics: const PageScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        ProductModel currentModel =
+                            sellerProductProvider.products[index];
+                        return Container(
+                          height: height * 0.32,
+                          width: width,
+                          margin: EdgeInsets.symmetric(vertical: height * 0.01),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 0.02,
+                              vertical: height * 0.01),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: grey)),
+                          child: Column(
+                            children: [
+                              CarouselSlider(
+                                options: CarouselOptions(
+                                    height: height * 0.2,
+                                    autoPlay: true,
+                                    viewportFraction: 1),
+                                items: currentModel.productImagesURL!.map((i) {
+                                  return Builder(
+                                    builder: (BuildContext context) {
+                                      return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          color: white,
+                                          image: DecorationImage(
+                                            image: NetworkImage(i),
+                                            fit: BoxFit.contain,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              }).toList(),
-                            ),
-                            const Spacer(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 7,
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        currentModel.productName!,
-                                        style: textTheme.bodyMedium!.copyWith(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        currentModel.productDescriptions!,
-                                        maxLines: 2,
-                                        style: textTheme.bodySmall!.copyWith(
-                                            overflow: TextOverflow.ellipsis,
-                                            color: grey),
-                                      ),
-                                    ],
+                                      );
+                                    },
+                                  );
+                                }).toList(),
+                              ),
+                              const Spacer(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 7,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          currentModel.productName!,
+                                          style: textTheme.bodyMedium!.copyWith(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          currentModel.productDescriptions!,
+                                          maxLines: 2,
+                                          style: textTheme.bodySmall!.copyWith(
+                                              overflow: TextOverflow.ellipsis,
+                                              color: grey),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                CommonFunctions.blankSpace(height * 0.01, 0),
-                                Expanded(
-                                  flex: 3,
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        currentModel.productPrice.toString(),
-                                        style: textTheme.bodyMedium,
-                                      ),
-                                      Text(
-                                        currentModel.inStock!
-                                            ? 'in Stock'
-                                            : 'Out of Stock',
-                                        style: textTheme.bodySmall!.copyWith(
-                                            color: currentModel.inStock!
-                                                ? teal
-                                                : red),
-                                      ),
-                                    ],
+                                  CommonFunctions.blankSpace(height * 0.01, 0),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          currentModel.productPrice.toString(),
+                                          style: textTheme.bodyMedium,
+                                        ),
+                                        Text(
+                                          currentModel.inStock!
+                                              ? 'in Stock'
+                                              : 'Out of Stock',
+                                          style: textTheme.bodySmall!.copyWith(
+                                              color: currentModel.inStock!
+                                                  ? teal
+                                                  : red),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
-                    });
-              }),
-            ],
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      });
+                }),
+              ],
+            ),
           ),
         ),
       ),

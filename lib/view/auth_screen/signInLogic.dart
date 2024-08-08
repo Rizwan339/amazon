@@ -75,10 +75,11 @@ class _SignInLogicState extends State<SignInLogic> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Image(
-        image: AssetImage('assets/images/amazon_splash_screen.png'),
-        fit: BoxFit.fitWidth,
+        image: const AssetImage('assets/images/amazon_splash_screen.png'),
+        // fit: BoxFit.fitHeight,
+        width: MediaQuery.of(context).size.width * 1.2,
       ),
     );
   }
